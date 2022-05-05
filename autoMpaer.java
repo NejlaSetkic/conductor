@@ -71,20 +71,6 @@ public abstract class AbstractProtoMapper {
         return to.build();
     }
 
-    public DynamicForkJoinTask fromProto(DynamicForkJoinTaskPb.DynamicForkJoinTask from) {
-        DynamicForkJoinTask to = new DynamicForkJoinTask();
-        to.setTaskName( from.getTaskName() );
-        to.setWorkflowName( from.getWorkflowName() );
-        to.setReferenceName( from.getReferenceName() );
-        Map<String, Object> inputMap = new HashMap<String, Object>();
-        for (Map.Entry<String, Value> pair : from.getInputMap().entrySet()) {
-            inputMap.put( pair.getKey(), fromProto( pair.getValue() ) );
-        }
-        to.setInput(inputMap);
-        to.setType( from.getType() );
-        return to;
-    }
-
     public DynamicForkJoinTaskListPb.DynamicForkJoinTaskList toProto(DynamicForkJoinTaskList from) {
         DynamicForkJoinTaskListPb.DynamicForkJoinTaskList.Builder to = DynamicForkJoinTaskListPb.DynamicForkJoinTaskList.newBuilder();
         for (DynamicForkJoinTask elem : from.getDynamicTasks()) {
